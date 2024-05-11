@@ -20,7 +20,7 @@ const products = [
   },
 ];
 
-app.get('/', (req, res) => res.send('Hello API!'));
+app.get('/', (req, res) => res.send('Hello Rainer, here are your API!'));
 
 app.get('/products/:id', (req, res) => {
   res.json(products.find((p) => p.id === +req.params.id));
