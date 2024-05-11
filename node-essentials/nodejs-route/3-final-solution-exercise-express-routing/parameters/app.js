@@ -5,18 +5,18 @@ const port = 3000;
 const products = [
   {
     id: 1,
-    name: 'Ivanhoe',
-    author: 'Sir Walter Scott',
+    name: 'TE300i',
+    Typ: 'Hardenduro',
   },
   {
     id: 2,
-    name: 'Colour Magic',
-    author: 'Terry Pratchett',
+    name: 'Tenere700',
+    Typ: 'TwinshockEnduro',
   },
   {
     id: 3,
-    name: 'The Bluest eye',
-    author: 'Toni Morrison',
+    name: 'VertigoBusto280',
+    Typ: 'TrialMoto',
   },
 ];
 
