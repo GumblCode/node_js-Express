@@ -1,10 +1,6 @@
+const fs = require("fs").promises;
 const path = require("path");
 
-const fs = require("fs").promises;
-
-async function main() {}
-
-main();
 
 async function findSalesFiles(folderName) {
 
@@ -54,3 +50,5 @@ async function main() {
   await fs.writeFile(path.join(salesTotalsDir, "totals.txt"), String());
   console.log(`Wrote sales totals to ${salesTotalsDir}`);
 }
+
+main();
