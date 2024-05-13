@@ -1,3 +1,5 @@
+const path = require("path");
+
 const fs = require("fs").promises;
 
 async function main() {}
@@ -33,6 +35,8 @@ async function findSalesFiles(folderName) {
 }
 
 async function main() {
-  const results = await findSalesFiles("stores");
-  console.log(results);
+  const salesDir = path.join(__dirname, "stores");
+
+  const salesFiles = await findSalesFiles(salesDir);
+  console.log(salesFiles);
 }
