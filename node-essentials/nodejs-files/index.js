@@ -1,5 +1,24 @@
 const fs = require("fs").promises;
 const path = require("path");
+async function calculateSalesTotal(salesFiles) {
+
+  // Final sales total
+  let salesTotal = 0;
+
+  // (1) Tterates over the `salesFiles` array.
+  for (file of salesFiles) {
+
+    // (2) Reads the file.
+    const fileContents = await fs.readFile(file)
+
+    // (3) Parses the content as JSON.
+    const data = JSON.parse(fileContents);
+
+    // (4) Increments the `salesTotal` variable with the `total` value from the file.
+    salesTotal += data.total;
+  }
+  return salesTotal;
+}
 
 
 async function findSalesFiles(folderName) {
@@ -32,23 +51,25 @@ async function findSalesFiles(folderName) {
 
 async function main() {
   const salesDir = path.join(__dirname, "stores");
-
-  // (1) Create a variable called `salesTotalsDir`, which holds the path of the *salesTotals* directory.
   const salesTotalsDir = path.join(__dirname, "salesTotals");
 
   try {
-    // (2) Create the directory if it doesn't already exist.
     await fs.mkdir(salesTotalsDir);
   } catch {
     console.log(`${salesTotalsDir} already exists.`);
   }
 
-  // Calculate sales totals
   const salesFiles = await findSalesFiles(salesDir);
 
-  // (3) Write the total to the "totals.txt" file with empty string `String()`
-  await fs.writeFile(path.join(salesTotalsDir, "totals.txt"), String());
-  console.log(`Wrote sales totals to ${salesTotalsDir}`);
+  // (1) Add a call to the `calculateSalesTotals` function just above the `fs.writeFile` call.
+  const salesTotal = await calculateSalesTotal(salesFiles);
+
+  // (2) Modify the `fs.writeFile` block to write the value of the `salesTotal` variable to the *totals.txt* file.
+  await fs.writeFile(
+    path.join(salesTotalsDir, "totals.txt"),
+    `${salesTotal}\r\n`,
+    { flag: "a" }
+  );
 }
 
 main();
